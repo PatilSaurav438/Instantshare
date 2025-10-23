@@ -85,8 +85,9 @@ async function handleFileUpload(file) {
     const formData = new FormData();
     formData.append('imageFile', file); 
 
-    // IMPORTANT: Replace 'http://localhost:3000' with your deployed backend URL (Render URL)
-    const uploadUrl = 'http://localhost:3000/upload'; 
+    // A. Actual API Call using XMLHttpRequest for progress tracking
+// NOTE: This line was changed to your live Render URL.
+const uploadUrl = 'https://instantshare-bh9q.onrender.com/upload';
 
     try {
         const xhr = new XMLHttpRequest();
