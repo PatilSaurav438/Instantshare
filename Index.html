@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Instant Image Share</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>⚡ Instant Share</h1>
+        <p>Upload, get an instant link. Auto-deleted in 10 minutes.</p>
+    </header>
+
+    <main class="container">
+        <div id="upload-zone" class="upload-area">
+            <input type="file" id="file-input" accept="image/*" hidden>
+            
+            <div id="drop-area" class="drop-target">
+                <p class="drag-text">Drag and drop your photo here</p>
+                <p>OR</p>
+                <button id="upload-btn" class="cta-button">Choose File</button>
+            </div>
+        </div>
+
+        <div id="progress-zone" class="hidden">
+            <p>Uploading...</p>
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+            <p id="progress-status">0%</p>
+        </div>
+
+        <div id="success-zone" class="hidden">
+            <h2>Upload Successful! 🎉</h2>
+            <div class="share-box">
+                <input type="text" id="share-link" readonly>
+                <button id="copy-btn" class="cta-button">Copy Link</button>
+            </div>
+            <p class="deletion-note">This link will **automatically delete** in 10 minutes.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Instant Share | **Privacy**: We do not store any files permanently.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
