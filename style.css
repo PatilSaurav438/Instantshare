@@ -206,46 +206,121 @@ footer {
     background-color: #0056b3;
 }
 
+/* Code Container Styling (Simplified and Modern) */
+.code-container {
+    background-color: var(--card-background); /* White */
+    padding: 30px;
+    border-radius: var(--border-radius); /* 12px */
+    box-shadow: var(--shadow); /* Softer Shadow */
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    margin: 20px auto; /* Auto margin for centering */
+}
+
+/* Header style ko thoda chota karen */
+.code-container h2 {
+    color: var(--text-color); /* Darker Text Color */
+    font-size: 1.4em;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+/* Input aur Button ka Layout */
+.code-input-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#codeInput {
+    flex-grow: 1; /* Input ko zyada jagah de */
+    padding: 12px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Softer radius */
+    text-align: center;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+#codeInput:focus {
+    border-color: var(--primary-color); /* Focus hone par green highlight */
+    outline: none;
+}
+
+#viewButton {
+    /* Yeh button ab CTA button jaisa dikhega */
+    background-color: #007BFF; /* Blue for visibility */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px; 
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    /* Margin top hata diya, flex align kar raha hai */
+}
+
+#viewButton:hover {
+    background-color: #0056b3;
+}
+
+/* Result Area */
 #codeResult {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px dashed #ccc;
-    border-radius: 5px;
-    background-color: #fff;
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #f9f9f9; /* Light background */
     word-break: break-all;
+    text-align: left; /* Text ko left align karen */
+}
+
+#codeResult p {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+#codeResult a {
+    color: var(--primary-color);
+    font-weight: bold;
 }
 
 #codeResult img {
-    border: 1px solid #eee;
-    border-radius: 5px;
-    max-height: 250px; 
-    object-fit: contain;
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin-top: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Code Display (Success Zone mein) */
 .code-display {
     font-size: 2em;
     font-weight: bold;
     color: #FF5722;
-    margin: 10px 0;
-    padding: 10px;
-    border: 2px solid #FF5722;
+    margin: 15px 0;
+    padding: 10px 20px;
+    border: 2px dashed #FF5722; /* Dashed border for attention */
     display: inline-block;
-    border-radius: 5px;
+    border-radius: 8px;
+    background-color: #fff3e0; /* Light orange background */
 }
-
-.expiry-note {
-    font-size: 0.9em;
-    color: #e74c3c;
-    margin-top: 10px;
-}
+/* Error and Loading messages */
 .loading-text {
     color: #555;
     font-style: italic;
+    display: block;
+    text-align: center;
 }
 .error {
     color: #D32F2F;
     font-weight: bold;
-    }
+    display: block;
+    text-align: center;
+}
 
 /* Media Query for Responsiveness */
 @media (max-width: 768px) {
