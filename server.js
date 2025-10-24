@@ -8,6 +8,14 @@ const path = require('path');
 const schedule = require('node-schedule');
 // require('dotenv').config(); // Uncomment this line in a real environment
 
+// ==========================================================
+// 1. New: Code Generator Function
+// ==========================================================
+function generateRandomCode() {
+    // 10000 से 99999 तक 5 अंकों का कोड जनरेट करता है
+    return Math.floor(10000 + Math.random() * 90000).toString();
+}
+
 const app = express();
 // IMPORTANT: Use process.env.PORT for deployment (e.g., on Render)
 const PORT = process.env.PORT || 3000; 
@@ -67,34 +75,38 @@ function scheduleDeletion(filePath, fileId) {
 }
 
 // 4. API Route: Image Upload
-app.post('/upload', (req, res) => {
-    upload(req, res, (err) => {
-        if (err instanceof multer.MulterError) {
-            return res.status(400).json({ success: false, message: err.message });
-        } else if (err) {
-            return res.status(400).json({ success: false, message: err.message });
+// ==========================================================
+// 2. Updated: /upload Route
+// ==========================================================
+app.post('/upload', upload.single('image'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: 'No image uploaded.' });
+    }
+
+    // --- नया कोड यहाँ ---
+    const accessCode = generateRandomCode(); // नया कोड जनरेट करें
+
+    // फ़ाइल नाम और कोड को एक साथ स्टोर करें ताकि इसे ट्रैक किया जा सके
+    fileStorage[accessCode] = req.file.filename;
+
+    // 10 मिनट बाद हटाने का टाइमर सेट करें
+    setTimeout(() => {
+        const filePath = path.join(__dirname, 'uploads', req.file.filename);
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+            console.log(`Deleted file: ${req.file.filename}`);
         }
+        delete fileStorage[accessCode]; // स्टोरेज से कोड हटाएं
+    }, 10 * 60 * 1000); // 10 minutes
+    // -------------------
 
-        if (!req.file) {
-            return res.status(400).json({ success: false, message: 'No file uploaded.' });
-        }
+    const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
 
-        // Success: Create the shareable link
-        // IMPORTANT: In production, req.hostname will be your Render URL.
-        const host = req.hostname === 'localhost' ? `http://localhost:${PORT}` : `https://${req.hostname}`;
-        const fileId = req.file.filename;
-        const shareLink = `${host}/view/${fileId}`; 
-
-        // Schedule file deletion
-        const filePath = path.join(UPLOAD_FOLDER, fileId);
-        scheduleDeletion(filePath, fileId);
-
-        // Send the link back to the client
-        res.status(200).json({ 
-            success: true, 
-            message: 'File uploaded successfully.', 
-            shareLink: shareLink
-        });
+    // जवाब में कोड भी भेजें
+    res.json({ 
+        url: imageUrl,
+        code: accessCode, // कोड यहाँ जोड़ा गया है
+        expiry: 10 // minutes
     });
 });
 
@@ -110,6 +122,21 @@ app.get('/view/:fileId', (req, res) => {
     }
 });
 
+// ==========================================================
+// 3. New: /code Route
+// ==========================================================
+app.get('/code/:code', (req, res) => {
+    const code = req.params.code;
+    const filename = fileStorage[code];
+
+    if (!filename) {
+        return res.status(404).json({ error: 'Code not found or expired.' });
+    }
+
+    // इमेज URL वापस भेजें
+    const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${filename}`;
+    res.json({ url: imageUrl });
+});
 
 // 6. Start Server
 app.listen(PORT, () => {
