@@ -246,3 +246,64 @@ footer {
     color: #D32F2F;
     font-weight: bold;
     }
+
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+    /* Main container ko vertical stack mein badalna */
+    .container {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px;
+    }
+
+    /* Upload aur Code container ke liye padding kam karna */
+    .upload-area,
+    .code-container,
+    #success-zone {
+        max-width: 100%;
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+    
+    /* Upload area ko chote screen par dikhana */
+    #upload-zone {
+        margin-bottom: 20px;
+    }
+
+    /* Code Container elements ko full width banana */
+    .code-container h2 {
+        font-size: 1.3em;
+    }
+    
+    #codeInput {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    #viewButton {
+        width: 100%;
+        padding: 12px;
+    }
+    
+    /* Success zone mein copy button ko alag line mein lana */
+    .share-box {
+        flex-direction: column;
+    }
+
+    #share-link-final,
+    #share-link {
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+
+    #copy-btn {
+        border-radius: 8px;
+        margin-top: 0;
+    }
+    
+    /* Code display size kam karna */
+    .code-display {
+        font-size: 1.5em;
+    }
+        }
