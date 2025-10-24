@@ -21,7 +21,7 @@ const codeResult = document.getElementById('codeResult');
 // NOTE: uploadUrl फ़ाइल के बाहर परिभाषित होना चाहिए (जैसे कि इस फ़ंक्शन के ऊपर)
 // लेकिन हम इसे यहाँ रखते हैं क्योंकि आपने इसे अपने अपलोड फ़ंक्शन के अंदर रखा था।
 const uploadUrl = 'https://instantshare-bh9q.onrender.com/upload';
-const uploadUrlBase = uploadUrl.replace('/upload', ''); // कोड एक्सेस के लिए बेस URL
+const uploadUrlBase = uploadUrl.replace('/upload', ''); // यह कोड व्यू के लिए बेस URL है
 
 // --- 1. Event Listeners (कोई बदलाव नहीं) ---
 uploadBtn.addEventListener('click', () => fileInput.click());
