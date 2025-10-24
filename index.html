@@ -15,7 +15,7 @@
 
     <main class="container">
         <div id="upload-zone" class="upload-area">
-            <input type="file" id="file-input" accept="image/*" hidden>
+            <input type="file" id="imageInput" accept="image/*" capture="camera" style="display: none;">
             
             <div id="drop-area" class="drop-target">
                 <p class="drag-text">Drag and drop your photo here</p>
@@ -24,6 +24,13 @@
             </div>
         </div>
 
+        <div class="code-container">
+    <h2>View Image with Code</h2>
+    <input type="text" id="codeInput" placeholder="Enter 5-digit code" maxlength="5">
+    <button id="viewButton">View</button>
+    <div id="codeResult"></div>
+        </div>
+        
         <div id="progress-zone" class="hidden">
             <p>Uploading...</p>
             <div class="progress-bar-container">
@@ -38,12 +45,12 @@
                 <input type="text" id="share-link" readonly>
                 <button id="copy-btn" class="cta-button">Copy Link</button>
             </div>
-            <p class="deletion-note">This link will **automatically delete** in 10 minutes.</p>
+            <p class="deletion-note">This link will *automatically delete* in 10 minutes.</p>
         </div>
     </main>
 
     <footer>
-        <p>© 2025 Instant Share | **Privacy**: We do not store any files permanently.</p>
+        <p>© 2025 Instant Share | *Privacy*: We do not store any files permanently.</p>
     </footer>
 
     <script src="script.js"></script>
